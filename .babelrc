@@ -15,15 +15,18 @@
             "imports": ["react", "redbox-react"]
           }]
         }],
-        ["import", {
-          "style": "css", "libraryName": "antd-mobile"
-        }]
+        ["import", [
+          { "style": "css", "libraryName": "antd-mobile" }
+        ]]
       ]
     },
     "production": {
       "plugins": [
         ["transform-object-rest-spread"],
-        ["transform-react-display-name"]
+        ["transform-react-display-name"],
+        ["import", [
+          { "style": "css", "libraryName": "antd-mobile" }
+        ]]
       ]
     }
   }

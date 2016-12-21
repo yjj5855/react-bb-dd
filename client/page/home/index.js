@@ -1,18 +1,7 @@
 import React from 'react'
 import Router, { Link, Route }  from 'react-router'
-import { NavBar, Icon, TabBar } from 'antd-mobile';
+import { NavBar, Icon, TabBar } from 'antd-mobile'
 import PhotoGrid from '../../components/PhotoGrid'
-
-
-const Index = () => (
-    <div>
-        <h1>Sidebar</h1>
-        <p>
-            Routes can have multiple components, so that all portions of your UI
-            can participate in the routing.
-        </p>
-    </div>
-)
 
 let Home = React.createClass({
 

@@ -15,6 +15,7 @@ export default {
     'biz.navigation.setTitle': 0,
     'biz.navigation.setRight': 0,
     'biz.navigation.back': 0,
+    'biz.navigation.close': 0,
     'device.notification.alert': 0,
     'device.notification.confirm': 0,
     'device.notification.prompt': 0,
