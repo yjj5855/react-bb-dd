@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import style from '../styles/router.css'
+import '../styles/style.scss'
 
 const Main = React.createClass({
 
