@@ -6,10 +6,9 @@ function posts(state = List([]), aciton) {
     switch (aciton.type){
         case 'INCREMENT_LIKES':
             let i = aciton.index;
-            state = state.update(i, function ($$post) {
+            return state.update(i, function ($$post) {
                 return $$post.set('likes', $$post.get('likes') + 1)
             });
-            return state
         default:
             return state;
     }

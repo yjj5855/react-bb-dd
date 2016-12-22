@@ -4,11 +4,10 @@ function postComments(state = List([]), action) {
 
     switch (action.type){
         case 'ADD_COMMENT':
-            state = state.push(Map({
+            return state.push(Map({
                 user: action.author,
                 text: action.comment
-            }))
-            return state;
+            }));
         case 'REMOVE_COMMENT':
             return state.delete(action.i,1)
         default:

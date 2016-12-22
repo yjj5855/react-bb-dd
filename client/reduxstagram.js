@@ -15,7 +15,6 @@ import store, { history } from './store'
 import callJsApi ,{ ddIsReady } from './common/ddPlugin'
 import {onEnter, onLeave} from './common/routeHook'
 
-import axios from 'axios'
 import { getConfig } from './common/axiosConfig'
 
 let ddConfig = null;
@@ -26,7 +25,7 @@ getConfig()
         return ddConfig
     })
     .then(ddIsReady)
-    // .then(initReact)
+    .then(initReactRender)
     .then(()=>{
         document.querySelector('#init-loading').remove();
         console.log('init react 完成')
@@ -43,7 +42,7 @@ getConfig()
         //手动触发dispatch
         $r.store.dispatch({ type: 'DDCONFIG_ERROR'})
         console.error(err);
-    })
+    });
 
 const router = (
     <Provider store={store}>
@@ -58,4 +57,7 @@ const router = (
     </Provider>
 )
 
-render(router, document.getElementById('root'));
+initReactRender();
+function initReactRender() {
+    render(router, document.getElementById('root'));
+}
