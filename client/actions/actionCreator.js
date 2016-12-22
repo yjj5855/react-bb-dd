@@ -41,3 +41,14 @@ export function updateCode(code) {
         code
     }
 }
+
+export function getConfig() {
+    return {
+        type: 'LOAD',
+        payload: {
+            request:{
+                url:'/categories'
+            }
+        }
+    }
+}

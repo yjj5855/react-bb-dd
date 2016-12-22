@@ -12,6 +12,23 @@ function app(state = [], aciton) {
                 ...state,
                 ddConfig: false
             }
+
+        //axios中间件生成的type
+        case 'LOAD':
+            return {
+                ...state,
+                isLoading : true,
+            }
+        case 'LOAD_SUCCESS':
+            return {
+                ...state,
+                isLoading : false,
+            }
+        case 'LOAD_FAIL':
+            return {
+                ...state,
+                isLoading : false,
+            }
         default:
             return state;
     }

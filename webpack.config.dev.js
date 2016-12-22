@@ -22,6 +22,10 @@ module.exports = {
   },
   module: {
     loaders: [
+    {
+      test: /\.json$/,
+      loaders: ['raw'],
+    },
     // js
     {
       test: /\.js$/,

@@ -1,6 +1,9 @@
-import { createStore, compose } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { hashHistory } from 'react-router'
+
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
 
 //import thi root reducer
 import rootReducer from './reducers/index'
@@ -17,10 +20,16 @@ const defaultState = {
 };
 
 const enhancers = compose(
+    applyMiddleware(
+        axiosMiddleware(axios), //axios 中间件
+    ),
     window.devToolsExtension ? window.devToolsExtension() : f=>f
 );
-
-const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(
+    rootReducer,
+    defaultState,
+    enhancers
+);
 
 export const history = syncHistoryWithStore(hashHistory, store);
 

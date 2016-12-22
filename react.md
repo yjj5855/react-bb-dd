@@ -8,13 +8,12 @@
 
 #### [react-router-redux - 连接路由和数据](https://www.baidu.com/s?wd=react-router-redux)
 
+#### [redux-axios-middleware - 异步数据中间件](https://github.com/svrcekmichal/redux-axios-middleware)
+
 #### [antd-mobile - 蚂蚁金服开源UI](https://mobile.ant.design/docs/react/introduce)
 
 #### [sass - css预处理器](https://www.baidu.com/s?wd=sass)
 
-#### [request - ajax请求](https://www.baidu.com/s?wd=node,request)
+#### [axios - ajax请求](https://www.baidu.com/s?wd=axios)
 
-#### [request-promise - ajax请求封装成promise](https://www.baidu.com/s?wd=request-promise)
-
-#### 待选 [q - promise库](https://www.baidu.com/s?wd=react-router) 
-#### 待选 [promise - es6的promise](https://www.baidu.com/s?wd=react-router) 
+#### [q - promise库](https://www.baidu.com/s?wd=react-router)

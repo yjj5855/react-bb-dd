@@ -12,6 +12,19 @@ let Home = React.createClass({
         }
     },
 
+    axiosAction(){
+        console.log(this)
+        this.props.getConfig()
+            .then((data)=>{
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.error(err)
+            })
+
+    },
+
+
     render(){
 
         return (
@@ -42,6 +55,8 @@ let Home = React.createClass({
                         }}
                         data-seed="logId"
                     >
+                        <h1>法师法师</h1>
+                        <div onClick={this.axiosAction}>法师法师</div>
                     </TabBar.Item>
                     <TabBar.Item
                         icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/UNQhIatjpNZHjVf.png' }}

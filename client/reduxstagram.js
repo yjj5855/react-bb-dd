@@ -12,16 +12,35 @@ import { Router, Route, IndexRoute, browserHistory} from 'react-router'
 import { Provider } from 'react-redux'
 import store, { history } from './store'
 
-import Raven from 'raven-js'
-import { sentry_url, logException } from './common/ravenConfig'
-
+import callJsApi ,{ ddIsReady } from './common/ddPlugin'
 import {onEnter, onLeave} from './common/routeHook'
 
-Raven.config(sentry_url, {
-    environment: process.env.NODE_ENV || 'dev',
-    release: '0.0.1',
-}).install();
+import axios from 'axios'
+import { getConfig } from './common/axiosConfig'
 
+let ddConfig = null;
+getConfig()
+    .then((data)=>{
+        ddConfig = data;
+        dd.config(ddConfig);
+        return ddConfig
+    })
+    .then(ddIsReady)
+    // .then(initReact)
+    .then(()=>{
+        document.querySelector('#init-loading').remove();
+        console.log('init react 完成')
+        setTimeout(()=>{
+            if(ddConfig != null){
+                // commit('DDCONFIG_SUCCESS', ddConfig)
+            }else{
+                // commit('DDCONFIG_ERROR', false);
+            }
+        },300)
+    })
+    .catch((err)=>{
+        console.error(err);
+    })
 
 const router = (
     <Provider store={store}>
