@@ -39,6 +39,9 @@ getConfig()
         },300)
     })
     .catch((err)=>{
+
+        //手动触发dispatch
+        $r.store.dispatch({ type: 'DDCONFIG_ERROR'})
         console.error(err);
     })
 

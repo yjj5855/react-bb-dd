@@ -1,19 +1,16 @@
-function postComments(state = [], action) {
+import { Map, List } from 'immutable'
+
+function postComments(state = List([]), action) {
 
     switch (action.type){
         case 'ADD_COMMENT':
-            return [
-                ...state,
-                {
-                    user: action.author,
-                    text: action.comment
-                }
-            ]
+            state = state.push(Map({
+                user: action.author,
+                text: action.comment
+            }))
+            return state;
         case 'REMOVE_COMMENT':
-            return [
-                ...state.slice(0, action.i),
-                ...state.slice(action.i+1)
-            ]
+            return state.delete(action.i,1)
         default:
             return state;
     }
@@ -21,14 +18,10 @@ function postComments(state = [], action) {
 }
 
 
-function comments(state = {}, aciton) {
+function comments(state = Map({}), aciton) {
 
-    // console.log('comment',aciton)
     if(typeof aciton.postId !== 'undefined'){
-        return {
-            ...state,
-            [aciton.postId]: postComments(state[aciton.postId],aciton)
-        }
+        return state.set(aciton.postId, postComments(state.get(aciton.postId),aciton))
     }
     return state;
 

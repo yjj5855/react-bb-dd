@@ -21,7 +21,6 @@ let Home = React.createClass({
             .catch((err)=>{
                 console.error(err)
             })
-
     },
 
 

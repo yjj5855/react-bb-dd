@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
+import Immutable from 'immutable'
 
 const Photo = React.createClass({
     render(){
-        const {post, i, comments} = this.props;
+        const {$$post, i, $$comments} = this.props;
+
+        let post = $$post.toJS();
+        let comments = $$comments.toJS();
+
+
         return (
             <figure className="grid-figure">
                 <div className="grid-photo-wrap">

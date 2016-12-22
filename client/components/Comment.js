@@ -1,7 +1,12 @@
 import React from 'react'
+import { is } from 'immutable';
 
 const Comment = React.createClass({
 
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return !(this.props.$$comments === nextProps.$$comments || is(this.props.$$comments, nextProps.$$comments)) ||
+            !(this.state === nextState || is(this.state, nextState));
+    },
     renderComment(comment, i){
         return (
             <div className="comment" key={i}>

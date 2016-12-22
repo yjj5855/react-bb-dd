@@ -8,16 +8,18 @@ import axiosMiddleware from 'redux-axios-middleware';
 //import thi root reducer
 import rootReducer from './reducers/index'
 
+import Immutable from 'immutable'
 import app from './data/app'
 import comments from './data/comments'
 import posts from './data/posts'
 
+
 //create an object on the default data
-const defaultState = {
+const defaultState = Immutable.fromJS({
     app,
     posts,
-    comments
-};
+    comments,
+});
 
 const enhancers = compose(
     applyMiddleware(
@@ -31,7 +33,11 @@ const store = createStore(
     enhancers
 );
 
-export const history = syncHistoryWithStore(hashHistory, store);
+export const history = syncHistoryWithStore(hashHistory, store, {
+    selectLocationState (state) {
+        return state.get('routing').toJS();
+    }
+});
 
 if(module.hot){
     module.hot.accept('./reducers/', ()=>{
