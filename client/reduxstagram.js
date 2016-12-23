@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import FastClick from 'fastclick'
 
 // import css from './styles/style.styl';
 
@@ -10,8 +11,7 @@ import Home from './page/home/index'
 
 import { Router, Route, IndexRoute, browserHistory} from 'react-router'
 import { Provider } from 'react-redux'
-import store, { history } from './store'
-
+// import {store, history } from './store' //不在这里引入 会影响dd.config配置
 import callJsApi ,{ ddIsReady } from './common/ddPlugin'
 import {onEnter, onLeave} from './common/routeHook'
 
@@ -21,6 +21,7 @@ let ddConfig = null;
 getConfig()
     .then((data)=>{
         ddConfig = data;
+        console.log(ddConfig)
         dd.config(ddConfig);
         return ddConfig
     })
@@ -38,26 +39,27 @@ getConfig()
         },300)
     })
     .catch((err)=>{
-
         //手动触发dispatch
         $r.store.dispatch({ type: 'DDCONFIG_ERROR'})
         console.error(err);
-    });
-
-const router = (
-    <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={App}>
-                <IndexRoute component={Home} onEnter={onEnter} onLeave={onLeave}></IndexRoute>
+    })
 
 
-                <Route path="/view/:postId" component={Single} onEnter={onEnter} onLeave={onLeave}></Route>
-            </Route>
-        </Router>
-    </Provider>
-)
 
-initReactRender();
 function initReactRender() {
+    const {store, history} = require('./store')
+    const router = (
+        <Provider store={store}>
+            <Router history={history}>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home} onEnter={onEnter} onLeave={onLeave}></IndexRoute>
+
+
+                    <Route path="/view/:postId" component={Single} onEnter={onEnter} onLeave={onLeave}></Route>
+                </Route>
+            </Router>
+        </Provider>
+    )
     render(router, document.getElementById('root'));
+    FastClick.attach(document.body)
 }

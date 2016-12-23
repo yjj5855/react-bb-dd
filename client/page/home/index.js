@@ -1,7 +1,8 @@
 import React from 'react'
 import Router, { Link, Route }  from 'react-router'
 import { NavBar, Icon, TabBar } from 'antd-mobile'
-import PhotoGrid from '../../components/PhotoGrid'
+// import PhotoGrid from '../../components/PhotoGrid'
+import Banbu from '../../components/Banbu'
 
 let Home = React.createClass({
 
@@ -28,11 +29,6 @@ let Home = React.createClass({
 
         return (
             <div>
-                <NavBar leftContent="返回" mode="light" onLeftClick={() => console.log('onLeftClick')}
-                        rightContent={[<Icon key="0" type="search" />, <Icon key="1" type="ellipsis" />]}
-                        style={{position:'fixed',width:'100%'}}>
-                    <Link to="/">Reduxstagram</Link>
-                </NavBar>
 
                 <TabBar
                     unselectedTintColor="#949494"
@@ -54,8 +50,8 @@ let Home = React.createClass({
                         }}
                         data-seed="logId"
                     >
-                        <h1>法师法师</h1>
-                        <div onClick={this.axiosAction}>法师法师</div>
+                        <h1>班步</h1>
+                        <Banbu />
                     </TabBar.Item>
                     <TabBar.Item
                         icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/UNQhIatjpNZHjVf.png' }}
@@ -70,7 +66,7 @@ let Home = React.createClass({
                         }}
                         data-seed="logId1"
                     >
-                        <PhotoGrid {...this.props} />
+                        <h1>首页</h1>
                     </TabBar.Item>
                     <TabBar.Item
                         icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/cKhfyLTszUeFARPgfokz.png' }}
@@ -84,6 +80,7 @@ let Home = React.createClass({
                             });
                         }}
                     >
+                        <h1>我的</h1>
                     </TabBar.Item>
                 </TabBar>
             </div>

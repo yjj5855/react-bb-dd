@@ -1,5 +1,6 @@
 import Q from 'q'
 import axios from 'axios'
+import jsapi from './ddApiConfig'
 import { logException } from './ravenConfig'
 
 const config = {
@@ -7,7 +8,8 @@ const config = {
     // 请求方法同上
     method: 'get', // default
     // 基础url前缀
-    baseURL: 'http://116.236.230.131:55002',
+    // baseURL: 'http://116.236.230.131:55002',
+    baseURL: 'http://192.168.1.13:8080/rest/ding',
 
 
     // transformRequest: [function (data) {
@@ -96,26 +98,29 @@ export function getParamByName(name) {
 
 export function getConfig() {
     return Q.Promise((success, error)=>{
-        axios.get('/auth/getConfig', {
-            params: {
-                corpid: getParamByName('corpid')||'ding1b56d2f4ba72e91635c2f4657eb6378f',
-                appid: getParamByName('appid')||'2545',
-                suitekey: getParamByName('suiteKey')||'suiteiyfdj0dfixywzqwg',
-                paramUrl: document.URL
-            },
-            timeout: 2000,
-        }).then(function (data) {
-
+        let postData = {
+            corpid: getParamByName('corpid')||'ding300b6b314632f87a35c2f4657eb6378f',
+            appid: getParamByName('appid')||'2545',
+            suitekey: getParamByName('suiteKey')||'suiteiyfdj0dfixywzqwg',
+            url:  window.location.href
+        }
+        axios.post('/auth/getConfig', postData).then(function (data) {
+            console.log(data)
             if(data.code == 200){
-                let res = data.result;
+                let res = data.data;
+                let jsApiList = [];
+                for(let key in jsapi){
+                    jsApiList.push(key)
+                }
+
                 let ddConfig = {
                     agentId: res.agentId, // 必填，微应用ID
-                    corpId: res.corpId,//必填，企业ID
+                    corpId: postData.corpid,//必填，企业ID
                     timeStamp: res.timeStamp, // 必填，生成签名的时间戳
                     nonceStr: res.nonceStr, // 必填，生成签名的随机串
                     signature: res.signature, // 必填，签名
-                    type:0,   //选填。0表示微应用的jsapi,1表示服务窗的jsapi。不填默认为0。该参数从dingtalk.js的0.8.3版本开始支持
-                    jsApiList : [
+                    type: 0,   //选填。0表示微应用的jsapi,1表示服务窗的jsapi。不填默认为0。该参数从dingtalk.js的0.8.3版本开始支持
+                    jsApiList: [
                         'runtime.info',
                         'runtime.permission.requestAuthCode',
                         //反馈式操作临时授权码
@@ -168,9 +173,7 @@ export function getConfig() {
                         'device.notification.actionSheet',
                         'device.notification.modal',
                         'device.geolocation.get',
-
-
-                    ] // 必填，需要使用的jsapi列表，注意：不要带dd。
+                    ], // 必填，需要使用的jsapi列表，注意：不要带dd。
                 }
                 success(ddConfig)
             }else{

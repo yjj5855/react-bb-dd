@@ -1,3 +1,5 @@
+import callJsApi from './ddPlugin'
+
 
 let sessionStorage = window.sessionStorage
 sessionStorage.clear()
@@ -25,8 +27,10 @@ export function onEnter(nextState, replaceState){
         to !== '/' && sessionStorage.setItem(to, historyCount)
         window.direction = 'forward'
     }
+    callJsApi('biz.navigation.setRight',{ show: false})
 }
 
 export function onLeave(currentState, replaceState){
     from = currentState.location.pathname;
+    callJsApi('biz.navigation.setRight',{ show: false})
 }

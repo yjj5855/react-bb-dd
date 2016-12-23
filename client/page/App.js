@@ -5,9 +5,7 @@ import Main from './Main'
 
 function mapStateToProps(state) {
     return {
-        $$app: state.get('app'),
-        $$posts: state.get('posts'),
-        $$comments: state.get('comments')
+        $$app: state.get('app')
     }
 }
 

@@ -29,34 +29,42 @@ export function ddIsReady(params) {
         let timeout = setTimeout(()=>{
             error({errCode:-1,msg:'dd.ready初始化超时'});
             logException(new Error('dd.ready初始化超时'), params)
-        },2000)
+        },5000)
         dd.ready(function(){
             console.log('初始化钉钉');
             clearTimeout(timeout)
 
             //获取容器信息
-            callJsApi('runtime.info').then((result)=>{
-                window.ability = parseInt(result.ability.replace(/\./g,''));
-                console.log('容器版本为'+window.ability)
+            dd.runtime.info({
+                onSuccess: function(result) {
+                    window.ability = parseInt(result.ability.replace(/\./g,''));
+                    console.log('容器版本为'+window.ability)
+                },
+                onFail : function(err) {}
             })
-
             //设置返回按钮
-            callJsApi('biz.navigation.setLeft',{
+            dd.biz.navigation.setLeft({
                 show: true,//控制按钮显示， true 显示， false 隐藏， 默认true
                 control: true,//是否控制点击事件，true 控制，false 不控制， 默认false
                 showIcon: true,//是否显示icon，true 显示， false 不显示，默认true； 注：具体UI以客户端为准
-                text: '返回'
-            }).then(()=>{
-                console.log('点击了返回按钮');
-                window.history.back();
+                text: '返回',//控制显示文本，空字符串表示显示默认文本
+                onSuccess : function(result) {
+                    //如果control为true，则onSuccess将在发生按钮点击事件被回调
+                    console.log('点击了返回按钮');
+                    window.history.back();
+                },
+                onFail : function(err) {}
+            });
+            dd.biz.navigation.setRight({
+                show:false,
             })
-
             success(true)
         });
         dd.error(function(err){
             clearTimeout(timeout)
             error({errCode:-1,msg:'dd.error配置信息不对'})
-            logException(new Error('dd.error配置信息不对'),err)
+            console.log(err)
+            logException(new Error('dd.error配置信息不对'), err)
         });
     })
 }

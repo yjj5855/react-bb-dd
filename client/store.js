@@ -10,15 +10,11 @@ import rootReducer from './reducers/index'
 
 import Immutable from 'immutable'
 import app from './data/app'
-import comments from './data/comments'
-import posts from './data/posts'
 
 
 //create an object on the default data
 const defaultState = Immutable.fromJS({
     app,
-    posts,
-    comments,
 });
 
 const enhancers = compose(
@@ -27,7 +23,7 @@ const enhancers = compose(
     ),
     window.devToolsExtension ? window.devToolsExtension() : f=>f
 );
-const store = createStore(
+export const store = createStore(
     rootReducer,
     defaultState,
     enhancers
@@ -45,5 +41,3 @@ if(module.hot){
         store.replaceReducer(nextRootReducer);
     })
 }
-
-export default store;

@@ -50,6 +50,7 @@ export default {
     'device.launcher.checkInstalledApps': 5,
     'device.launcher.launchApp': 5,
     'runtime.permission.requestAuthCode': 5,
+    'runtime.permission.requestOperateAuthCode': 5,
     'runtime.permission.requestJsApis': 5,
     'ui.pullToRefresh.enable': 5,
     'ui.pullToRefresh.stop': 5,
