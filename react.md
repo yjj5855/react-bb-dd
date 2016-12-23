@@ -20,4 +20,4 @@
 
 #### [axios - ajax请求](https://www.baidu.com/s?wd=axios)
 
-#### [q - promise库](https://www.baidu.com/s?wd=react-router)
+#### [q - promise库](https://www.baidu.com/s?wd=q.js)
